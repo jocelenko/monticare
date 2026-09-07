@@ -1,0 +1,169 @@
+/* ============================================================
+   MontiCare — shared design system  (see DESIGN.md)
+   ============================================================ */
+:root{
+  --aqua-900:#005B57; --aqua-700:#1A847F; --aqua-500:#46A49E; --aqua-400:#80BFBA;
+  --aqua-300:#A9D5D1; --aqua-100:#D6ECEA; --aqua-50:#E7F5F4;
+  --grey-900:#1B252F; --grey-700:#4A5560; --grey-600:#65707C;
+  --grey-300:#B6BFC8; --grey-200:#D5DCE2; --grey-50:#F3F7FB;
+  --white:#fff;
+  --sh-1:0 1px 2px rgba(27,37,47,.06), 0 2px 6px rgba(27,37,47,.05);
+  --sh-2:0 2px 4px rgba(27,37,47,.06), 0 8px 22px rgba(27,37,47,.08);
+  --sh-3:0 4px 10px rgba(27,37,47,.08), 0 18px 44px rgba(27,37,47,.10);
+  --ease:cubic-bezier(.16,1,.3,1);
+  --pad:clamp(20px,5vw,60px);
+  --font:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font);color:var(--grey-700);background:var(--white);
+     font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+h1,h2,h3,h4{color:var(--grey-900);margin:0;line-height:1.15;letter-spacing:-.02em;
+            text-wrap:balance;font-weight:700}
+p{margin:0}
+a{color:var(--aqua-900)}
+a:hover{color:var(--aqua-900);text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--aqua-900);outline-offset:2px;border-radius:3px}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:var(--pad)}
+.narrow{max-width:680px}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+    clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* skip link — real, not decorative */
+.skip{position:absolute;left:12px;top:-60px;z-index:200;background:var(--grey-900);
+      color:#fff;padding:12px 18px;border-radius:6px;font-weight:600;
+      text-decoration:none;transition:top .18s var(--ease)}
+.skip:focus{top:12px;color:#fff}
+
+/* ---------- buttons: 48px floor, real focus ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+     min-height:52px;padding:0 26px;border-radius:8px;font-weight:700;font-size:17px;
+     text-decoration:none;border:2px solid transparent;cursor:pointer;
+     transition:background .16s var(--ease),border-color .16s var(--ease),
+                box-shadow .16s var(--ease),transform .16s var(--ease)}
+.btn-primary{background:var(--aqua-700);color:#fff;box-shadow:var(--sh-1)}
+.btn-primary:hover{background:var(--aqua-900);color:#fff;box-shadow:var(--sh-2)}
+.btn-primary:active{transform:translateY(1px)}
+.btn-ghost{background:#fff;color:var(--grey-900);border-color:var(--grey-200)}
+.btn-ghost:hover{border-color:var(--aqua-700);color:var(--aqua-900);background:var(--aqua-50)}
+.btn-onDark{background:#fff;color:var(--grey-900)}
+.btn-onDark:hover{background:var(--aqua-100);color:var(--grey-900)}
+
+/* ---------- the phone number is a component, not a detail ---------- */
+.tel{display:inline-flex;align-items:center;gap:10px;font-weight:800;
+     min-height:44px;padding-block:4px;
+     color:var(--grey-900);text-decoration:none;letter-spacing:-.01em;
+     font-variant-numeric:tabular-nums}
+.tel:hover{color:var(--aqua-900)}
+.tel:hover .tel-num{text-decoration:underline;text-underline-offset:3px}
+.tel svg{flex:none;color:var(--aqua-700)}
+.tel-lg{font-size:clamp(22px,3vw,30px)}
+
+/* ---------- header ---------- */
+.hdr{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.94);
+     backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--grey-200)}
+.hdr-in{display:flex;align-items:center;gap:22px;min-height:76px}
+.logo{display:flex;align-items:center;flex:none;text-decoration:none;
+      min-height:48px;padding-inline:2px}
+.logo svg{height:34px;width:auto}
+.nav{display:flex;gap:4px;margin-left:auto;align-items:center}
+.nav a{padding:10px 14px;border-radius:7px;color:var(--grey-700);text-decoration:none;
+       font-weight:600;font-size:15.5px}
+.nav a:hover{background:var(--grey-50);color:var(--grey-900)}
+.hdr-cta{display:flex;align-items:center;gap:16px;flex:none}
+.menu-btn{display:none;align-items:center;justify-content:center;gap:8px;min-height:46px;
+  padding:0 14px;border-radius:8px;border:1px solid var(--grey-200);background:#fff;
+  color:var(--grey-900);font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+.menu-btn:hover{border-color:var(--aqua-700);color:var(--aqua-900)}
+.menu-panel{display:none;border-top:1px solid var(--grey-200);background:#fff}
+.menu-panel[data-open="true"]{display:block}
+.menu-panel nav{display:flex;flex-direction:column;padding:10px 0 18px}
+.menu-panel nav a{padding:15px 4px;min-height:52px;display:flex;align-items:center;
+  font-weight:600;font-size:17px;color:var(--grey-900);text-decoration:none;
+  border-bottom:1px solid var(--grey-200)}
+.menu-panel nav a:hover{color:var(--aqua-900)}
+.menu-panel .btn{margin-top:18px;width:100%}
+@media(max-width:980px){
+  .nav{display:none}
+  .menu-btn{display:inline-flex;margin-left:auto}
+  .hdr-cta{margin-left:0}
+}
+@media(min-width:981px){.menu-panel{display:none!important}}
+@media(max-width:600px){.hdr-cta .btn{display:none}}
+
+/* ---------- section rhythm: more space above a heading than below ---------- */
+.sec{padding-block:clamp(56px,8vw,104px)}
+.sec-tint{background:var(--grey-50)}
+.sec-wash{background:var(--aqua-50)}
+.sec-dark{background:var(--grey-900);color:var(--aqua-100)}
+.sec-dark h2,.sec-dark h3{color:#fff}
+.lede{font-size:clamp(18px,2vw,21px);line-height:1.55;color:var(--grey-700)}
+h1.display{font-size:clamp(34px,5.6vw,62px);font-weight:800;letter-spacing:-.033em;line-height:1.04}
+h2.title{font-size:clamp(26px,3.6vw,42px);font-weight:800;letter-spacing:-.028em}
+h3.sub{font-size:clamp(19px,2vw,23px);font-weight:700;letter-spacing:-.018em}
+.kicker{font-size:13px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+        color:var(--aqua-900)}
+
+/* ---------- checklist / point-form (Webster asked for point form) ---------- */
+.ticks{list-style:none;margin:0;padding:0;display:grid;gap:13px}
+.ticks li{position:relative;padding-left:34px;line-height:1.5}
+.ticks li::before{content:"";position:absolute;left:0;top:.3em;width:21px;height:21px;
+  border-radius:50%;background:var(--aqua-100);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231A847F' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+  background-size:13px;background-repeat:no-repeat;background-position:center}
+.sec-dark .ticks li::before{background-color:rgba(255,255,255,.14);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A9D5D1' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")}
+
+
+/* ---------- hero scaffolding shared by all three concepts ---------- */
+:root{--hdr:76px}
+.hero-split{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(28px,4.5vw,64px);
+            align-items:center}
+@media(max-width:900px){.hero-split{grid-template-columns:1fr;gap:26px}}
+.hero-copy h1{margin-top:16px}
+.hero-copy .lede{margin-top:20px;max-width:54ch}
+.hero-act{margin-top:28px;display:flex;flex-wrap:wrap;gap:13px;align-items:center}
+.hero-proof{margin-top:28px;padding-top:22px;border-top:1px solid var(--grey-200)}
+.sec-dark .hero-proof{border-top-color:rgba(255,255,255,.16)}
+.sec-dark .proof-item{color:#fff}
+.sec-dark .proof-item svg{color:var(--aqua-300)}
+
+/* ---------- media ---------- */
+.ph{background-size:cover;background-position:center;border-radius:14px;
+    background-color:var(--aqua-100)}
+
+/* ---------- proof band ---------- */
+.proof{display:flex;flex-wrap:wrap;gap:14px 30px;align-items:center}
+.proof-item{display:flex;align-items:center;gap:11px;font-weight:600;
+            color:var(--grey-900);font-size:15.5px}
+.proof-item svg{color:var(--aqua-700);flex:none}
+
+/* ---------- footer ---------- */
+.ftr{background:var(--grey-900);color:var(--grey-300);padding-block:clamp(48px,6vw,74px)}
+.ftr h3{color:#fff;font-size:15px;font-weight:700;margin:0 0 14px;
+        letter-spacing:.02em}
+.ftr a{color:var(--grey-300);text-decoration:none}
+.ftr a:hover{color:#fff;text-decoration:underline}
+.ftr-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:44px}
+@media(max-width:820px){.ftr-grid{grid-template-columns:1fr 1fr;gap:34px}}
+@media(max-width:520px){.ftr-grid{grid-template-columns:1fr}}
+.ftr-base{margin-top:38px;padding-top:22px;border-top:1px solid rgba(255,255,255,.13);
+          display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;
+          font-size:13.5px;color:var(--grey-300)}
+
+/* ---------- reveal ----------
+   Content is visible by default. Only once JS has confirmed it can animate
+   (body.js-anim) does anything start hidden, so a JS failure or an old browser
+   still gets the whole page. */
+.rise{opacity:1;transform:none}
+/* Only elements JS has confirmed are BELOW the fold get armed, so nothing that
+   is already on screen can ever be hidden by a failed observer. */
+.rise.armed{opacity:0;transform:translateY(16px);
+      transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.rise.armed.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .rise{opacity:1!important;transform:none!important}
+}

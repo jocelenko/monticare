@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: "Public Sans", "Helvetica Neue", Arial, sans-serif; }
+    a { color: #1A847F; } a:hover { color: #005B57; }
+    .mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+    .sw { display: flex; flex-direction: column; gap: 7px; flex-grow: 1; }
+    .chip { height: 74px; border-radius: 3px; }
+    .meta { display: flex; flex-direction: column; gap: 2px; }
+    .hex { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px; color: #1B252F; }
+    .nm  { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 9.5px; color: #65707C; letter-spacing: .06em; }
+    .cr  { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 9.5px; }
+  </style>
+</helmet>
+
+<div style="width: 1240px; height: 820px; background: #FFFFFF; color: #1B252F; display: flex; flex-direction: column; box-sizing: border-box; padding: 50px 60px 42px;">
+
+  <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #D5DCE2; padding-bottom: 18px;">
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <div style="font-size: 30px; font-weight: 700; letter-spacing: -0.02em;">Aqua and light grey</div>
+      <div style="font-size: 15px; color: #65707C;">Two families, one hue each. Both built out from the colours already in the draft.</div>
+    </div>
+    <div class="mono" style="font-size: 11px; color: #65707C; letter-spacing: .08em; text-align: right; line-height: 1.7;">
+      CONTRAST vs WHITE<br>WCAG 2.1 &mdash; AA IS 4.5:1
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 30px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;">
+      <div style="font-size: 17px; font-weight: 700;">Aqua</div>
+      <div class="mono" style="font-size: 10px; color: #65707C; letter-spacing: .1em;">OKLCH HUE 190 &mdash; THE DRAFT'S TEAL, DEEPENED ONE STEP</div>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <div class="sw"><div class="chip" style="background:#005B57"></div><div class="meta"><div class="hex">#005B57</div><div class="nm">AQUA 900</div><div class="cr" style="color:#1A847F">7.97:1 &middot; AAA</div></div></div>
+      <div class="sw"><div class="chip" style="background:#1A847F; outline: 2px solid #1B252F; outline-offset: 2px;"></div><div class="meta"><div class="hex">#1A847F</div><div class="nm">AQUA 700 &mdash; PRIMARY</div><div class="cr" style="color:#1A847F">4.52:1 &middot; AA</div></div></div>
+      <div class="sw"><div class="chip" style="background:#46A49E"></div><div class="meta"><div class="hex">#46A49E</div><div class="nm">AQUA 500</div><div class="cr" style="color:#9F1239">2.97:1 &middot; UI only</div></div></div>
+      <div class="sw"><div class="chip" style="background:#80BFBA"></div><div class="meta"><div class="hex">#80BFBA</div><div class="nm">AQUA 400 &mdash; RING (POSITIVE)</div><div class="cr" style="color:#9F1239">2.08:1 &middot; 1.86 on field</div></div></div>
+      <div class="sw"><div class="chip" style="background:#A9D5D1"></div><div class="meta"><div class="hex">#A9D5D1</div><div class="nm">AQUA 300</div><div class="cr" style="color:#9F1239">1.60:1 &middot; UI only</div></div></div>
+      <div class="sw"><div class="chip" style="background:#D6ECEA"></div><div class="meta"><div class="hex">#D6ECEA</div><div class="nm">AQUA 100</div><div class="cr" style="color:#65707C">surface</div></div></div>
+      <div class="sw"><div class="chip" style="background:#E7F5F4; border: 1px solid #D5DCE2; box-sizing: border-box;"></div><div class="meta"><div class="hex">#E7F5F4</div><div class="nm">AQUA 50 &mdash; FIELD</div><div class="cr" style="color:#65707C">surface</div></div></div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 30px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;">
+      <div style="font-size: 17px; font-weight: 700;">Light grey</div>
+      <div class="mono" style="font-size: 10px; color: #65707C; letter-spacing: .1em;">OKLCH HUE 248 &mdash; THE WORDMARK'S SLATE IS THIS FAMILY'S DARK END</div>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <div class="sw"><div class="chip" style="background:#1B252F"></div><div class="meta"><div class="hex">#1B252F</div><div class="nm">GREY 900 &mdash; DARK GROUND</div><div class="cr" style="color:#1A847F">15.53:1 &middot; AAA</div></div></div>
+      <div class="sw"><div class="chip" style="background:#4A5560; outline: 2px solid #1B252F; outline-offset: 2px;"></div><div class="meta"><div class="hex">#4A5560</div><div class="nm">GREY 700 &mdash; BODY TEXT</div><div class="cr" style="color:#1A847F">7.61:1 &middot; AAA</div></div></div>
+      <div class="sw"><div class="chip" style="background:#65707C"></div><div class="meta"><div class="hex">#65707C</div><div class="nm">GREY 600 &mdash; TAGLINE</div><div class="cr" style="color:#1A847F">5.05:1 &middot; AA</div></div></div>
+      <div class="sw"><div class="chip" style="background:#65707C"></div><div class="meta"><div class="hex">#65707C</div><div class="nm">GREY 500</div><div class="cr" style="color:#9F1239">3.62:1 &middot; large only</div></div></div>
+      <div class="sw"><div class="chip" style="background:#B6BFC8"></div><div class="meta"><div class="hex">#B6BFC8</div><div class="nm">GREY 300 &mdash; BORDERS</div><div class="cr" style="color:#65707C">surface</div></div></div>
+      <div class="sw"><div class="chip" style="background:#D5DCE2"></div><div class="meta"><div class="hex">#D5DCE2</div><div class="nm">GREY 200 &mdash; RULES</div><div class="cr" style="color:#65707C">surface</div></div></div>
+      <div class="sw"><div class="chip" style="background:#F3F7FB; border: 1px solid #D5DCE2; box-sizing: border-box;"></div><div class="meta"><div class="hex">#F3F7FB</div><div class="nm">GREY 50 &mdash; PAGE</div><div class="cr" style="color:#65707C">surface</div></div></div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; padding-top: 30px; margin-top: 26px;">
+    <div style="background: #F3F7FB; padding: 20px 22px; display: flex; flex-direction: column; gap: 9px;">
+      <div style="font-size: 14px; font-weight: 700;">The draft was already on this ramp</div>
+      <div style="font-size: 13.5px; line-height: 1.6; color: #4A5560;">
+        Its ring read <span class="mono" style="font-size:12px;">#A8D5D3</span> and its field averaged
+        <span class="mono" style="font-size:12px;">#E6F5F4</span> across the gradient — each within two
+        channel steps of Aqua&nbsp;300 and Aqua&nbsp;50 here. The hue was right; only the ink weights failed.
+      </div>
+    </div>
+    <div style="background: #FEF2F2; padding: 20px 22px; display: flex; flex-direction: column; gap: 9px;">
+      <div style="font-size: 14px; font-weight: 700; color: #9F1239;">One thing to confirm with Webster</div>
+      <div style="font-size: 13.5px; line-height: 1.6; color: #4A5560;">
+        Light grey works as <strong>surface</strong> — page and panel backgrounds. It cannot carry body
+        text: anything lighter than Grey&nbsp;600 fails AA. Reading it as "light grey pages, dark grey type"
+        keeps the brief and the accessibility target together.
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

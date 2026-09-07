@@ -1,0 +1,420 @@
+<!-- ══════════════════════════════════════════════════════════════
+     A · FRONT DOOR
+     THESIS  The homepage's job is triage, not persuasion. It refuses the
+             hero-image-and-tagline arrangement every care site ships and
+             asks one question instead.
+     STORY   You arrive frightened or busy, you say which one you are, and
+             the page becomes about you. Then you ring.
+     ══════════════════════════════════════════════════════════════ -->
+<style>
+.a-hero{padding-block:clamp(34px,5vw,64px) clamp(30px,4.5vw,58px)}
+.a-hero h1{max-width:15ch;font-size:clamp(31px,3.9vw,49px);letter-spacing:-.03em}
+.a-hstack{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
+.a-h1{grid-column:1 / -1;min-height:clamp(220px,26vw,300px)}
+.a-h2{grid-column:1 / 2;min-height:clamp(130px,15vw,170px)}
+.a-h3{grid-column:2 / 3;min-height:clamp(130px,15vw,170px);background-position:50% 30%}
+@media(max-width:900px){.a-h1{min-height:210px}.a-h2,.a-h3{min-height:130px}}
+.a-ask{padding-block:clamp(18px,3vw,34px) clamp(24px,3.5vw,40px);border-top:1px solid var(--grey-200)}
+.a-ask h2{max-width:16ch}
+.a-ask .lede{max-width:56ch;margin-top:16px}
+.a-doors{display:grid;gap:16px;padding-bottom:clamp(48px,7vw,88px)}
+.a-door{border:1px solid var(--grey-200);border-radius:16px;background:#fff;
+        box-shadow:var(--sh-1);overflow:hidden;transition:box-shadow .2s var(--ease),
+        border-color .2s var(--ease)}
+.a-door:hover{box-shadow:var(--sh-2);border-color:var(--aqua-400)}
+.a-door[data-open="true"]{border-color:var(--aqua-700);box-shadow:var(--sh-2)}
+.a-dbtn{width:100%;display:flex;align-items:center;gap:20px;text-align:left;
+        background:none;border:0;cursor:pointer;font:inherit;color:inherit;
+        padding:clamp(20px,3vw,30px) clamp(20px,3vw,32px)}
+.a-dbtn:hover .a-dtitle{color:var(--aqua-900)}
+.a-dmark{flex:none;width:56px;height:56px;border-radius:14px;background:var(--aqua-50);
+         display:grid;place-items:center;color:var(--aqua-700)}
+.a-door[data-open="true"] .a-dmark{background:var(--aqua-700);color:#fff}
+.a-dtxt{flex:1;min-width:0}
+.a-dtitle{display:block;font-size:clamp(20px,2.5vw,27px);font-weight:800;
+          color:var(--grey-900);letter-spacing:-.022em;line-height:1.2}
+.a-dsub{display:block;margin-top:7px;color:var(--grey-600);font-size:16px;line-height:1.45;
+        max-width:52ch}
+.a-chev{flex:none;color:var(--aqua-700);transition:transform .3s var(--ease)}
+.a-door[data-open="true"] .a-chev{transform:rotate(180deg)}
+.a-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s var(--ease)}
+.a-door[data-open="true"] .a-panel{grid-template-rows:1fr}
+.a-panel > div{overflow:hidden}
+.a-pin{padding:4px clamp(20px,3vw,32px) clamp(24px,3vw,32px);
+       display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(22px,3vw,40px)}
+.a-pin .ticks{align-self:start}
+.a-pact{margin-top:22px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.a-pimg{border-radius:12px;min-height:210px}
+@media(max-width:760px){.a-pin{grid-template-columns:1fr}.a-pimg{min-height:160px}
+  .a-dmark{width:46px;height:46px}.a-dbtn{gap:14px}}
+/* the first door is physically larger — traffic is not evenly split */
+.a-door.is-main .a-dbtn{padding-block:clamp(26px,3.6vw,38px)}
+.a-door.is-main .a-dtitle{font-size:clamp(22px,3vw,32px)}
+
+.a-help{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(26px,4vw,60px);align-items:start}
+@media(max-width:820px){.a-help{grid-template-columns:1fr}}
+.a-map{margin-top:26px;border-radius:14px;min-height:170px;background-position:50% 55%}
+.a-mapcap{margin-top:11px;font-size:14.5px;color:var(--grey-600);line-height:1.5}
+.a-svc{list-style:none;margin:18px 0 0;padding:0;border-top:1px solid var(--grey-200)}
+.a-svc li{border-bottom:1px solid var(--grey-200)}
+.a-svc a{display:flex;align-items:center;justify-content:space-between;gap:16px;
+         padding:17px 4px;text-decoration:none;color:var(--grey-900);font-weight:600;
+         font-size:17.5px;min-height:56px}
+.a-svc a{transition:color .18s var(--ease)}
+.a-svc a span,.a-svc a{will-change:auto}
+.a-svc a:hover{color:var(--aqua-900)}
+.a-svc a > :first-child{transition:transform .18s var(--ease)}
+.a-svc a:hover > :first-child{transform:translateX(8px)}
+.a-svc span{color:var(--grey-600);font-weight:400;font-size:15px;text-align:right}
+.a-svc svg{color:var(--aqua-700);flex:none}
+.a-who{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(26px,4vw,60px);align-items:center}
+.a-wimg{border-radius:16px;min-height:360px}
+@media(max-width:860px){.a-who{grid-template-columns:1fr}.a-wimg{min-height:230px}}
+.at-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;
+            gap:clamp(28px,5vw,64px);align-items:start;
+            margin-top:clamp(30px,4.5vw,50px)}
+@media(max-width:980px){.at-layout{grid-template-columns:1fr}}
+.at-rail{position:relative;padding-left:72px}
+@media(max-width:700px){.at-rail{padding-left:50px}}
+.at-line{position:absolute;left:22px;top:8px;bottom:8px;width:3px;
+         background:var(--grey-200);border-radius:2px}
+@media(max-width:700px){.at-line{left:14px}}
+.at-line::after{content:"";position:absolute;inset:0;border-radius:2px;
+  background:linear-gradient(var(--aqua-700),var(--aqua-500));
+  transform:scaleY(var(--fill,0));transform-origin:top;
+  transition:transform .25s linear}
+.at-stop{position:relative;padding-bottom:clamp(30px,4.5vw,46px)}
+.at-stop:last-child{padding-bottom:0}
+.at-dot{position:absolute;left:-72px;top:-2px;width:47px;height:47px;border-radius:50%;
+  background:#fff;border:3px solid var(--grey-200);display:grid;place-items:center;
+  font-weight:800;font-size:17px;color:var(--grey-600);z-index:1;
+  transition:border-color .4s var(--ease),color .4s var(--ease),background .4s var(--ease)}
+@media(max-width:700px){.at-dot{left:-50px;width:31px;height:31px;font-size:14px;border-width:2px}}
+.at-stop.in .at-dot{border-color:var(--aqua-700);background:var(--aqua-700);color:#fff}
+.at-when{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+         color:var(--aqua-900)}
+.at-stop h3{margin-top:8px}
+.at-stop p{margin-top:10px;max-width:58ch;line-height:1.6}
+.at-aside{margin-top:14px;background:#fff;border:1px solid var(--grey-200);
+          border-radius:12px;padding:15px 18px;font-size:16px;max-width:58ch;
+          box-shadow:var(--sh-1)}
+.at-aside b{color:var(--grey-900)}
+.at-side{position:sticky;top:100px;display:flex;flex-direction:column;gap:14px}
+@media(max-width:980px){.at-side{position:static;max-width:520px}}
+.at-img{border-radius:14px;min-height:180px;background-position:50% 40%}
+.at-card{background:#fff;border:1px solid var(--grey-200);border-radius:14px;
+         padding:24px;box-shadow:var(--sh-1)}
+.at-card p{margin-top:10px;font-size:15.5px;line-height:1.55;color:var(--grey-700)}
+.at-card .tel{margin-top:16px;font-size:23px}
+.at-note{margin-top:16px;padding-top:14px;border-top:1px solid var(--grey-200);
+         font-size:14.5px;color:var(--grey-600);line-height:1.55}
+.a-call{background:var(--aqua-900);color:#fff;border-radius:18px;
+        padding:clamp(28px,4vw,44px);display:flex;flex-wrap:wrap;gap:26px;
+        align-items:center;justify-content:space-between}
+.a-call h2{color:#fff;font-size:clamp(23px,3vw,33px);font-weight:800;letter-spacing:-.025em}
+.a-call p{color:var(--aqua-100);margin-top:9px;max-width:46ch}
+.a-call .tel{color:#fff}
+.a-call .tel svg{color:var(--aqua-100)}
+</style>
+
+<a class="skip" href="#a-main">Skip to content</a>
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="logo" href="#" aria-label="MontiCare home"><svg viewBox="0 0 690.18 234.25" role="img"><title>MontiCare</title><use href="#mc-monti"/><use href="#mc-care"/><use href="#mc-tag"/></svg></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#a-who">About us</a>
+      <a href="#a-help">Services</a>
+      <a href="#a-why">Why choose us</a>
+      <a href="#a-call">Contact</a>
+    </nav>
+    <button class="menu-btn" aria-expanded="false" aria-controls="menu-a"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</button>
+    <div class="hdr-cta">
+      <a class="tel" href="tel:0447334958"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="tel-num">0447 334 958</span></a>
+      <a class="btn btn-primary" href="#a-call">Make a referral</a>
+    </div>
+  </div>
+  <div class="menu-panel" id="menu-a" data-open="false">
+    <div class="wrap"><nav aria-label="Main">
+        <a href="#a-help">Supports</a>
+        <a href="#a-who">Who we are</a>
+        <a href="#a-call">Contact</a>
+      </nav><a class="btn btn-primary" href="#a-call">Make a referral</a></div>
+  </div>
+</header>
+
+<main id="a-main">
+  <section class="a-hero">
+    <div class="wrap hero-split">
+      <div class="hero-copy">
+        <p class="kicker">Registered NDIS provider &middot; Burpengary East</p>
+        <h1 class="display">Everyday support at home, and the complex care others
+          turn down.</h1>
+        <p class="lede">MontiCare supports people of all ages across Brisbane, Moreton
+          Bay and the Sunshine Coast &mdash; from help with showering and meals, to
+          getting out into the community, to clinical supports like PEG feeding and
+          epilepsy management. Whatever changes, the same team stays with you.</p>
+        <div class="hero-act">
+          <a class="btn btn-primary" href="tel:0447334958">Ring 0447 334 958</a>
+          <a class="btn btn-ghost" href="#a-help">See what we do</a>
+        </div>
+        <div class="hero-proof proof">
+          <span class="proof-item"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Registered NDIS provider</span>
+          <span class="proof-item"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Referrals answered in 24 hours</span>
+          <span class="proof-item"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>Brisbane &middot; Moreton Bay &middot; Sunshine Coast</span>
+        </div>
+      </div>
+      <div class="a-hstack">
+        <div class="ph a-h1" role="img" aria-label="A young man using a forearm crutch talking with a support worker in his kitchen."
+             style="background-image:var(--img-living-room)"></div>
+        <div class="ph a-h2" role="img" aria-label="Two women sitting together indoors, laughing."
+             style="background-image:var(--img-laughing)"></div>
+        <div class="ph a-h3" role="img" aria-label="A young woman using a wheelchair on a path among trees."
+             style="background-image:var(--img-outdoors-trees)"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- triage now sits under the explanation, not instead of it -->
+  <section class="wrap a-ask">
+    <h2 class="title">Who are we helping today?</h2>
+    <p class="lede">Pick the one that sounds like you and we will show you what happens
+      next. You can always just ring us instead.</p>
+  </section>
+
+  <div class="wrap a-doors">
+    <article class="a-door is-main" data-open="true">
+      <h2 style="margin:0">
+        <button class="a-dbtn" aria-expanded="true" aria-controls="a-p1">
+          <span class="a-dmark" aria-hidden="true"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.6V21h14V9.6"/><path d="M10 21v-6h4v6"/></svg></span>
+          <span class="a-dtxt">
+            <span class="a-dtitle">Support for me, or someone in my family</span>
+            <span class="a-dsub">Help at home, getting out and about, or care for
+              complex health needs.</span>
+          </span>
+          <span class="a-chev" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+      </h2>
+      <div class="a-panel" id="a-p1"><div><div class="a-pin">
+        <div>
+          <p style="margin-bottom:16px">You do not need to have everything worked out
+            before you call. Tell us what a normal day looks like and what is hard
+            about it, and we will take it from there.</p>
+          <ul class="ticks">
+            <li>Personal care, showering and getting dressed</li>
+            <li>Meals, laundry and keeping the house running</li>
+            <li>Getting to appointments, shops and social things</li>
+            <li>Complex health needs like PEG feeding, epilepsy or wound care</li>
+          </ul>
+          <div class="a-pact">
+            <a class="btn btn-primary" href="tel:0447334958">Ring 0447 334 958</a>
+            <a class="btn btn-ghost" href="#a-call">Send us a message instead</a>
+          </div>
+        </div>
+        <div class="ph a-pimg" role="img" aria-label="A support worker sitting with an older woman in her lounge room, both smiling."
+             style="background-image:var(--img-inhome-walker)"></div>
+      </div></div></div>
+    </article>
+
+    <article class="a-door">
+      <h2 style="margin:0">
+        <button class="a-dbtn" aria-expanded="false" aria-controls="a-p2">
+          <span class="a-dmark" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h4"/></svg></span>
+          <span class="a-dtxt">
+            <span class="a-dtitle">I am a Support Coordinator</span>
+            <span class="a-dsub">Capability, current capacity and how we handle a referral.</span>
+          </span>
+          <span class="a-chev" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+      </h2>
+      <div class="a-panel" id="a-p2"><div><div class="a-pin">
+        <div>
+          <p style="margin-bottom:16px">We take participants other providers turn
+            down. Referrals are acknowledged within 24 hours and intake planning
+            starts within 48, subject to capacity.</p>
+          <ul class="ticks">
+            <li>PEG feeding, epilepsy and complex bowel management</li>
+            <li>Diabetes support including BSL monitoring and prescribed insulin</li>
+            <li>Hoist and transfer, pressure care, wound and continence care</li>
+            <li>Shift notes every service, incident reporting inside NDIS timeframes</li>
+            <li>Monthly participant reports and one named contact</li>
+          </ul>
+          <div class="a-pact">
+            <a class="btn btn-primary" href="#a-call">Refer a participant</a>
+            <a class="btn btn-ghost" href="tel:0447334958">Check capacity by phone</a>
+          </div>
+        </div>
+        <div class="ph a-pimg" role="img" aria-label="A support worker on the phone at a desk."
+             style="background-image:var(--img-phone-call)"></div>
+      </div></div></div>
+    </article>
+
+    <article class="a-door">
+      <h2 style="margin:0">
+        <button class="a-dbtn" aria-expanded="false" aria-controls="a-p3">
+          <span class="a-dmark" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12V7a3 3 0 0 0-6 0v5a2.5 2.5 0 0 0 2.5 2.5Z"/><path d="M15.5 14.5A2.5 2.5 0 0 1 13 12V7a3 3 0 0 1 6 0v5a2.5 2.5 0 0 1-2.5 2.5Z"/><path d="M12 17v5"/></svg></span>
+          <span class="a-dtxt">
+            <span class="a-dtitle">I work in allied health or nursing</span>
+            <span class="a-dsub">How we work alongside a clinical team.</span>
+          </span>
+          <span class="a-chev" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+      </h2>
+      <div class="a-panel" id="a-p3"><div><div class="a-pin">
+        <div>
+          <p style="margin-bottom:16px">Support workers assigned to complex
+            participants are trained for the specific supports, assessed for
+            competency before allocation, and supervised after it.</p>
+          <ul class="ticks">
+            <li>We work to your care plan, not around it</li>
+            <li>Escalation protocol for clinical or behavioural change</li>
+            <li>Documentation you can actually use in a review</li>
+          </ul>
+          <div class="a-pact">
+            <a class="btn btn-primary" href="tel:0447334958">Speak to our intake team</a>
+          </div>
+        </div>
+        <div class="ph a-pimg" role="img" aria-label="A support worker helping a woman using a wheelchair with strength exercises at home."
+             style="background-image:var(--img-hero-active)"></div>
+      </div></div></div>
+    </article>
+  </div>
+
+  <!-- Plain-language service index -->
+  <section class="sec sec-tint" id="a-help">
+    <div class="wrap a-help">
+      <div>
+        <h2 class="title">What we can help with</h2>
+        <p class="lede" style="margin-top:18px">Every support below is delivered to an
+          individual plan, across Brisbane, Moreton Bay and the Sunshine Coast.</p>
+        <div class="proof" style="margin-top:26px">
+          <span class="proof-item"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Registered NDIS provider</span>
+          <span class="proof-item"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Referrals answered in 24 hours</span>
+        </div>
+        <div class="ph a-map" role="img" aria-label="Aerial view of a Queensland suburb."
+             style="background-image:var(--img-suburb)"></div>
+        <p class="a-mapcap">We travel to participants across Brisbane, Moreton Bay and
+          the Sunshine Coast.</p>
+      </div>
+      <ul class="a-svc">
+        <li><a href="#a-call">High intensity &amp; complex care <span>PEG, epilepsy, wound, insulin</span></a></li>
+        <li><a href="#a-call">In-home support <span>Personal care and daily living</span></a></li>
+        <li><a href="#a-call">Domestic assistance <span>Cleaning, laundry, meals</span></a></li>
+        <li><a href="#a-call">Community access <span>Outings, shopping, appointments</span></a></li>
+        <li><a href="#a-call">Transport <span>Medical and allied health</span></a></li>
+        <li><a href="#a-call">Daily living support <span>Building skills and confidence</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="a-who">
+    <div class="wrap a-who">
+      <div class="ph a-wimg" role="img" aria-label="Two people walking together in a park, one using a wheelchair."
+           style="background-image:var(--img-park-pair)"></div>
+      <div>
+        <p class="kicker">Who we are</p>
+        <h2 class="title" style="margin-top:14px">We are a small team, and that is the point</h2>
+        <p class="lede" style="margin-top:18px">A consistent roster means the person who
+          walks through your door is someone you already know. For a participant with
+          complex needs that is not a nicety, it is the difference between a good day
+          and a hospital admission.</p>
+        <ul class="ticks" style="margin-top:24px">
+          <li>Based in Burpengary East, working across Brisbane, Moreton Bay and the Sunshine Coast</li>
+          <li>Workers matched to a participant and kept there</li>
+          <li>Shift notes every visit and a monthly report</li>
+          <li>One named contact you can actually reach</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-tint" id="a-why">
+    <div class="wrap">
+      <div style="max-width:58ch">
+        <p class="kicker">Why choose us</p>
+        <h2 class="title" style="margin-top:14px">From your first call to your first shift</h2>
+        <p class="lede" style="margin-top:18px">In complex care, reliability is not a
+          nice extra. Here is what actually happens after you get in touch, and the
+          timings we hold ourselves to.</p>
+      </div>
+
+      <div class="at-layout">
+        <div class="at-rail" data-rail>
+          <div class="at-line" aria-hidden="true"></div>
+
+          <div class="at-stop rise">
+            <span class="at-dot" aria-hidden="true">1</span>
+            <p class="at-when">Today</p>
+            <h3 class="sub">You ring, or send us a message</h3>
+            <p>Tell us who needs support and what is hard right now. You do not need a
+              plan number, a diagnosis or the right words.</p>
+          </div>
+
+          <div class="at-stop rise">
+            <span class="at-dot" aria-hidden="true">2</span>
+            <p class="at-when">Within 24 hours</p>
+            <h3 class="sub">A real person gets back to you</h3>
+            <p>Not an automated reply. Someone from our intake team acknowledges the
+              referral and tells you who is handling it.</p>
+            <div class="at-aside"><b>If we are not the right fit</b>, this is when we say
+              so. We would rather point you somewhere better than sit on a referral for
+              a fortnight.</div>
+          </div>
+
+          <div class="at-stop rise">
+            <span class="at-dot" aria-hidden="true">3</span>
+            <p class="at-when">Within 48 hours</p>
+            <h3 class="sub">We plan how support will start</h3>
+            <p>We work out what is needed, which of our workers is the right match, and
+              when they can begin. For complex supports we talk to the nurses, doctors
+              or allied health people already involved, so nothing gets lost.</p>
+          </div>
+
+          <div class="at-stop rise">
+            <span class="at-dot" aria-hidden="true">4</span>
+            <p class="at-when">First week</p>
+            <h3 class="sub">You meet your support worker</h3>
+            <p>The same person, on a steady roster. Workers supporting participants with
+              high-intensity needs are assessed for competency before they are
+              allocated, and supervised after it.</p>
+          </div>
+
+          <div class="at-stop rise">
+            <span class="at-dot" aria-hidden="true">5</span>
+            <p class="at-when">Ongoing</p>
+            <h3 class="sub">You always know how it is going</h3>
+            <p>Shift notes every visit, a monthly report, and one named contact you can
+              ring. If something changes, you hear it from us first.</p>
+          </div>
+        </div>
+
+        <aside class="at-side">
+          <div class="ph at-img" role="img" aria-label="A member of the intake team on the phone at her desk."
+               style="background-image:var(--img-phone-call)"></div>
+          <div class="at-card">
+            <h3 class="sub">Rather just talk?</h3>
+            <p>Ring us and skip all of this. Weekdays, and we answer our own phone.</p>
+            <a class="tel" href="tel:0447334958"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="tel-num">0447 334 958</span></a>
+            <p class="at-note">Referrals are acknowledged within 24 hours, including
+              ones that arrive over the weekend.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-tint" id="a-call" style="padding-top:0">
+    <div class="wrap">
+      <div class="a-call">
+        <div>
+          <h2>Not sure where you fit? Just ring.</h2>
+          <p>We would rather have a five minute conversation than have you
+             guess. If we are not the right provider, we will tell you who is.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+          <a class="tel tel-lg" href="tel:0447334958"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="tel-num">0447 334 958</span></a>
+          <a class="btn btn-onDark" href="mailto:admin@purposesupportprogram.com.au">Email us instead</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

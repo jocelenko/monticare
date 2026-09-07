@@ -1,0 +1,14 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html",     "x": 0,    "y": 0,    "w": 1240, "h": 800 },
+    { "file": "Negative.dc.html", "x": 1340, "y": 0,    "w": 1240, "h": 620 },
+    { "file": "Fixes.dc.html",    "x": 0,    "y": 940,  "w": 1240, "h": 900 },
+    { "file": "Palette.dc.html",  "x": 1340, "y": 940,  "w": 1240, "h": 820 },
+    { "file": "Usage.dc.html",    "x": 0,    "y": 1980, "w": 1240, "h": 860 }
+  ],
+  "annotations": [
+    { "id": "brief", "x": 1340, "y": 1980, "w": 420,
+      "text": "Outstanding for Webster:\n\n1. Sign off the aqua deepening (#2A8F8A → #1A847F). It takes the colour to 4.52:1 on white, so the same aqua can carry links and buttons on the site rather than needing a second, darker one.\n\n2. Confirm \"light grey\" means page and panel surfaces, not body text. Anything lighter than #65707C fails AA.\n\n3. Approve or reject the M monogram for the browser tab. He asked for a wordmark with no symbol, and at 32px the full badge is unreadable — so this is the one place that rule has to bend or the tab stays blank.\n\n4. Confirm MontiCare is the final ASIC name before any of this is applied. Note ASIC registers the company name; a trade mark is a separate filing with IP Australia." }
+  ],
+  "launch": { "view": "canvas" }
+}

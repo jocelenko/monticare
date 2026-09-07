@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: "Public Sans", "Helvetica Neue", Arial, sans-serif; }
+    a { color: #1A847F; } a:hover { color: #005B57; }
+    .mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+    .no { position: absolute; top: -7px; right: -7px; width: 19px; height: 19px; border-radius: 50%;
+          background: #9F1239; color: #fff; font-size: 12px; font-weight: 700; line-height: 19px;
+          text-align: center; }
+    .cap { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 9.5px;
+           color: #65707C; letter-spacing: .06em; }
+  </style>
+</helmet>
+
+<div style="width: 1240px; height: 860px; background: #FFFFFF; color: #1B252F; display: flex; flex-direction: column; box-sizing: border-box; padding: 50px 60px 42px;">
+
+  <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #D5DCE2; padding-bottom: 18px;">
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <div style="font-size: 30px; font-weight: 700; letter-spacing: -0.02em;">Using it</div>
+      <div style="font-size: 15px; color: #65707C;">Clear space, smallest safe sizes, and which file goes where.</div>
+    </div>
+    <div class="mono" style="font-size: 11px; color: #65707C; letter-spacing: .08em; text-align: right; line-height: 1.7;">
+      UNIT = M &mdash; THE WORDMARK CAP HEIGHT<br>10% OF THE BADGE DIAMETER
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 50px; padding: 32px 0 30px; align-items: flex-start;">
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="position: relative; padding: 22px; border: 1px dashed #65707C; display: inline-flex;">
+        <img src="monticare-badge-positive.svg" width="220" height="220" alt="Badge with clear space">
+        <div style="position: absolute; left: 0; top: 0; width: 22px; height: 22px; background: #1A847F;"></div>
+        <div style="position: absolute; left: 1px; top: 27px; font-family: ui-monospace, Menlo, monospace; font-size: 10px; font-weight: 600; color: #1A847F;">1M</div>
+      </div>
+      <div class="cap">CLEAR SPACE &mdash; ONE FULL CAP HEIGHT, ALL SIDES</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 20px; flex-grow: 1;">
+      <div style="font-size: 14px; font-weight: 700;">Smallest safe size</div>
+      <div style="display: flex; gap: 34px; align-items: flex-end;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 9px;">
+          <img src="monticare-badge-positive.svg" width="80" height="80" alt="Badge at 80px">
+          <div class="cap" style="text-align:center;">BADGE<br>80px &middot; 25mm</div>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 9px;">
+          <img src="monticare-badge-solid.svg" width="48" height="48" alt="Solid badge at 48px">
+          <div class="cap" style="text-align:center;">SOLID<br>48px &middot; 15mm</div>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 9px;">
+          <img src="monticare-favicon.svg" width="32" height="32" alt="Monogram at 32px">
+          <div class="cap" style="text-align:center;">MONOGRAM<br>16px &middot; screen only</div>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 9px;">
+          <img src="monticare-wordmark-positive.svg" width="160" alt="Wordmark at 160px">
+          <div class="cap" style="text-align:center;">WORDMARK<br>160px wide &middot; 50mm</div>
+        </div>
+      </div>
+      <div style="background: #F3F7FB; border-left: 3px solid #1A847F; padding: 13px 17px; font-size: 13.5px; line-height: 1.6; color: #4A5560;">
+        Below 80px the tagline stops being readable. Swap to the solid badge, then to the monogram —
+        don't shrink the primary past its floor.
+      </div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 46px; border-top: 1px solid #D5DCE2; padding-top: 26px; flex-grow: 1;">
+
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+      <div class="mono" style="font-size: 10px; letter-spacing: .12em; color: #65707C;">WHICH FILE</div>
+      <div style="display: flex; flex-direction: column; gap: 11px; font-size: 13.5px; color: #4A5560;">
+        <div style="display: flex; gap: 12px;"><div class="mono" style="font-size: 11px; color: #1A847F; width: 152px; flex-shrink: 0;">monticare-wordmark-positive</div><div>Site header, letterhead, quotes, email signature.</div></div>
+        <div style="display: flex; gap: 12px;"><div class="mono" style="font-size: 11px; color: #1A847F; width: 152px; flex-shrink: 0;">monticare-badge-positive</div><div>Anywhere the mark stands alone on a light page.</div></div>
+        <div style="display: flex; gap: 12px;"><div class="mono" style="font-size: 11px; color: #1A847F; width: 152px; flex-shrink: 0;">monticare-badge-solid</div><div>Social avatars, app tiles, small stickers. One colour.</div></div>
+        <div style="display: flex; gap: 12px;"><div class="mono" style="font-size: 11px; color: #1A847F; width: 152px; flex-shrink: 0;">monticare-*-negative</div><div>Dark footer, dark slides, over photography.</div></div>
+        <div style="display: flex; gap: 12px;"><div class="mono" style="font-size: 11px; color: #1A847F; width: 152px; flex-shrink: 0;">monticare-mono-black</div><div>Faxed forms, stamps, invoices, embroidery.</div></div>
+        <div style="display: flex; gap: 12px;"><div class="mono" style="font-size: 11px; color: #1A847F; width: 152px; flex-shrink: 0;">monticare-favicon</div><div>Browser tab. Awaiting your sign-off.</div></div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+      <div class="mono" style="font-size: 10px; letter-spacing: .12em; color: #65707C;">DON'T</div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px;">
+        <div style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
+          <div style="position: relative; width: 100%; height: 84px; display: flex; align-items: center; justify-content: center; background: #F3F7FB; overflow: hidden;">
+            <img src="monticare-badge-positive.svg" height="72" style="width: 104px;" alt="Do not stretch the badge">
+            <div class="no">&times;</div>
+          </div>
+          <div class="cap" style="text-align:center;">STRETCH</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
+          <div style="position: relative; width: 100%; height: 84px; display: flex; align-items: center; justify-content: center; background: #F3F7FB; overflow: hidden;">
+            <img src="monticare-badge-positive.svg" height="72" style="filter: hue-rotate(115deg) saturate(2.4);" alt="Do not recolour the badge">
+            <div class="no">&times;</div>
+          </div>
+          <div class="cap" style="text-align:center;">RECOLOUR</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
+          <div style="position: relative; width: 100%; height: 84px; display: flex; align-items: center; justify-content: center; background: linear-gradient(115deg,#4A5560,#A9D5D1,#65707C,#D6ECEA); overflow: hidden;">
+            <img src="monticare-wordmark-positive.svg" style="height: 42px;" alt="Do not place the wordmark on a busy ground">
+            <div class="no">&times;</div>
+          </div>
+          <div class="cap" style="text-align:center;">BUSY GROUND</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
+          <div style="position: relative; width: 100%; height: 84px; display: flex; align-items: center; justify-content: center; background: #F3F7FB; overflow: hidden;">
+            <img src="monticare-badge-positive.svg" height="72" style="opacity: .34;" alt="Do not fade or tint the badge">
+            <div class="no">&times;</div>
+          </div>
+          <div class="cap" style="text-align:center;">FADE / TINT</div>
+        </div>
+      </div>
+      <div style="font-size: 13px; line-height: 1.6; color: #4A5560; padding-top: 2px;">
+        Each of these breaks something the rebuild was built to hold — proportion, colour, or contrast.
+        If a placement seems to need a different treatment, use one of the files above instead.
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

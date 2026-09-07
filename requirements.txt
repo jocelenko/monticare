@@ -1,0 +1,9 @@
+# Logo generator (brand/build-logo.py)
+fonttools>=4.60
+uharfbuzz>=0.51
+
+# PDF builder (pdf/build.py) — woff2 subsetting
+brotli>=1.1
+
+# Image prep and measurement
+Pillow>=11.0

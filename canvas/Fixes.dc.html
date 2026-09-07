@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: "Public Sans", "Helvetica Neue", Arial, sans-serif; }
+    a { color: #1A847F; } a:hover { color: #005B57; }
+    .mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+    .xh { position: absolute; inset: 0; pointer-events: none; }
+    .xh::before, .xh::after { content: ""; position: absolute; background: #E11D48; opacity: .7; }
+    .xh::before { left: 50%; top: 0; bottom: 0; width: 1px; }
+    .xh::after  { top: 50%; left: 0; right: 0; height: 1px; }
+    .num { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 10px;
+           color: #FFFFFF; background: #1B252F; border-radius: 2px; padding: 2px 6px; }
+  </style>
+</helmet>
+
+<div style="width: 1240px; height: 900px; background: #FFFFFF; color: #1B252F; display: flex; flex-direction: column; box-sizing: border-box; padding: 50px 60px 42px;">
+
+  <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #D5DCE2; padding-bottom: 18px;">
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <div style="font-size: 30px; font-weight: 700; letter-spacing: -0.02em;">What changed, and why</div>
+      <div style="font-size: 15px; color: #65707C;">Measured off the supplied PNG. Geometry and contrast figures are read from the files; the rest are the calls I made.</div>
+    </div>
+    <div class="mono" style="font-size: 11px; color: #65707C; letter-spacing: 0.08em; text-align: right; line-height: 1.7;">
+      SOURCE 2000&times;1048 PNG<br>REBUILD VECTOR SVG
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 46px; padding: 30px 0 26px; align-items: flex-start;">
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+      <div style="position: relative; width: 250px; height: 250px;">
+        <img src="source-cropped.png" width="250" height="250" alt="Supplied draft" style="display: block;">
+        <div class="xh"></div>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+        <div style="font-size: 13.5px; font-weight: 600; color: #9F1239;">Supplied draft</div>
+        <div class="mono" style="font-size: 10px; color: #65707C;">WORD SITS LEFT AND LOW</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+      <div style="position: relative; width: 250px; height: 250px;">
+        <img src="monticare-badge-positive.svg" width="250" height="250" alt="Rebuild" style="display: block;">
+        <div class="xh"></div>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+        <div style="font-size: 13.5px; font-weight: 600; color: #1A847F;">Rebuild</div>
+        <div class="mono" style="font-size: 10px; color: #65707C; text-align: center; line-height: 1.5;">CENTRED ON MEASURED INK<br>+4 RIGHT, +16 DOWN &mdash; DELIBERATE</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px; flex-grow: 1; padding-top: 6px;">
+      <div style="font-size: 15px; line-height: 1.65; color: #4A5560;">
+        The red crosshair is the true centre of each circle. In the draft the wordmark sits
+        <strong style="color: #1B252F;">53px left</strong> of it and the whole block
+        <strong style="color: #1B252F;">40px low</strong> — on a 1010px circle that is a
+        5.2% horizontal error, visible at any size.
+      </div>
+      <div style="font-size: 15px; line-height: 1.65; color: #4A5560;">
+        The rebuild centres the wordmark on its own ink, then balances the stack against its
+        measured centre of mass — a heavy word over a light tracked line reads top-heavy if you
+        centre the box instead. That is why it still sits a touch right of and below the crosshair —
+        4 units and 16 units, both on purpose.
+      </div>
+      <div style="background: #F3F7FB; border-left: 3px solid #1A847F; padding: 14px 18px; font-size: 14px; line-height: 1.6; color: #4A5560;">
+        The draft could not be upscaled. It is a raster export with a soft gradient fill and
+        colour fringing from screen anti-aliasing. Everything here is redrawn as vector.
+      </div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 46px; border-top: 1px solid #D5DCE2; padding-top: 22px; flex-grow: 1;">
+
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+      <div class="mono" style="font-size: 10px; letter-spacing: .12em; color: #65707C;">GEOMETRY</div>
+
+      <div style="display: flex; gap: 14px; align-items: flex-start;">
+        <div class="num">01</div>
+        <div style="font-size: 13.5px; line-height: 1.55; color: #4A5560;">
+          <strong style="color: #1B252F;">Wordmark off-centre.</strong> Recentred, plus 4 units right
+          for the round <em>e</em> against the flat <em>M</em> stem.
+        </div>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: flex-start;">
+        <div class="num">02</div>
+        <div style="font-size: 13.5px; line-height: 1.55; color: #4A5560;">
+          <strong style="color: #1B252F;">Block sagging.</strong> Repositioned against the ink
+          centroid, not the bounding box.
+        </div>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: flex-start;">
+        <div class="num">03</div>
+        <div style="font-size: 13.5px; line-height: 1.55; color: #4A5560;">
+          <strong style="color: #1B252F;">Tagline drift.</strong> Letterspacing left a trailing
+          gap after the final D, pulling the line off centre. Trimmed.
+        </div>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: flex-start;">
+        <div class="num">04</div>
+        <div style="font-size: 13.5px; line-height: 1.55; color: #4A5560;">
+          <strong style="color: #1B252F;">Hairline ring.</strong> 1.1% of the diameter — gone below
+          64px. Now 1.6%, with a solid variant for small sizes.
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+      <div class="mono" style="font-size: 10px; letter-spacing: .12em; color: #65707C;">LEGIBILITY &amp; PRODUCTION</div>
+
+      <div style="display: flex; gap: 14px; align-items: flex-start;">
+        <div class="num">05</div>
+        <div style="font-size: 13.5px; line-height: 1.55; color: #4A5560;">
+          <strong style="color: #1B252F;">Tagline failed contrast</strong> at 2.73:1 on the field.
+          Now 4.51:1 there and 5.05:1 on white — clears AA on both. This one matters most.
+        </div>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: flex-start;">
+        <div class="num">06</div>
+        <div style="font-size: 13.5px; line-height: 1.55; color: #4A5560;">
+          <strong style="color: #1B252F;">Aqua deepened a step</strong>, 3.89:1 &rarr; 4.52:1 on white
+          (4.03:1 on the badge's own pale field), so one colour also serves links and buttons.
+        </div>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: flex-start;">
+        <div class="num">07</div>
+        <div style="font-size: 13.5px; line-height: 1.55; color: #4A5560;">
+          <strong style="color: #1B252F;">Gradient fill flattened.</strong> Gradients break in print,
+          embroidery and single-colour use.
+        </div>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: flex-start;">
+        <div class="num">08</div>
+        <div style="font-size: 13.5px; line-height: 1.55; color: #4A5560;">
+          <strong style="color: #1B252F;">Type outlined.</strong> The draft was set in an Arial-class
+          grotesque. Redrawn in Public Sans and converted to shapes — no font to license or install.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>
