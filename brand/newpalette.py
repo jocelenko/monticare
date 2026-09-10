@@ -54,11 +54,16 @@ TINT_T = shift("1D5864", 0.925, 0.34)
 WASH_P = shift("B783AA", 0.965, 0.30)
 TINT_P = shift("B783AA", 0.928, 0.36)
 PAGE   = shift("202544", 0.975, 0.20)
+# Section grounds. These carry most of the page's coloured surface, so they are
+# what makes a scheme read as the new palette rather than as the old one.
+SECT_T = shift("1D5864", 0.955, 0.45)
+SECT_P = shift("B783AA", 0.955, 0.45)
 
 TOKENS = {
   "body": BODY, "quiet": QUIET, "rule": RULE, "line": LINE,
   "wash_teal": WASH_T, "tint_teal": TINT_T,
   "wash_pink": WASH_P, "tint_pink": TINT_P, "page": PAGE,
+  "sect_teal": SECT_T, "sect_pink": SECT_P,
   **{k:"#"+v for k,v in CLIENT.items()},
 }
 

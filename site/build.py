@@ -332,8 +332,8 @@ SCHEMES = {
         "--aqua-900:%(deepteal)s;--aqua-700:%(teal)s;--aqua-500:%(lightteal)s;"
         "--aqua-400:%(lightteal)s;--aqua-300:%(tint_teal)s;--aqua-100:%(tint_teal)s;"
         "--aqua-50:%(wash_teal)s;"
-        "--grey-900:%(navy)s;--grey-700:%(body)s;--grey-600:%(quiet)s;"
-        "--grey-300:%(line)s;--grey-200:%(rule)s;--grey-50:%(page)s}") % T,
+        "--grey-900:%(deepteal)s;--grey-700:%(body)s;--grey-600:%(quiet)s;"
+        "--grey-300:%(line)s;--grey-200:%(rule)s;--grey-50:%(sect_teal)s}") % T,
         "logo": {"monti": T["indigo"], "care": T["teal"], "tag": T["quiet"],
                  "monti_neg": "#FFFFFF", "care_neg": T["tint_teal"], "tag_neg": T["line"]}},
 
@@ -344,7 +344,7 @@ SCHEMES = {
         "--aqua-400:%(pink)s;--aqua-300:%(tint_pink)s;--aqua-100:%(tint_pink)s;"
         "--aqua-50:%(wash_pink)s;"
         "--grey-900:%(indigo)s;--grey-700:%(body)s;--grey-600:%(quiet)s;"
-        "--grey-300:%(line)s;--grey-200:%(rule)s;--grey-50:%(page)s}") % T,
+        "--grey-300:%(line)s;--grey-200:%(rule)s;--grey-50:%(sect_pink)s}") % T,
         "logo": {"monti": T["indigo"], "care": T["mauve"], "tag": T["quiet"],
                  "monti_neg": "#FFFFFF", "care_neg": T["pink"], "tag_neg": T["line"]}},
 }
