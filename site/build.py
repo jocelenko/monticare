@@ -26,6 +26,14 @@ def prepare():
 
 
 prepare()
+
+# Token set derived from the client's seven new colours. Regenerated here so a
+# fresh clone needs no extra step; see brand/newpalette.py for the audit.
+_np = f"{HERE}/../brand/newpalette.py"
+_ns = {"__name__": "__derive__"}
+exec(compile(open(_np).read(), _np, "exec"), _ns)
+T = _ns["TOKENS"]
+
 LOGO = json.load(open(f"{HERE}/parts/logo.json"))
 IMGS = json.load(open(f"{HERE}/parts/images.json"))
 
@@ -68,17 +76,26 @@ FOOTER = """
 
 # the outlines are authored in badge coordinates; the flat wordmark carries a
 # translate to bring them back to its own viewBox. Bake it into each symbol.
-T = LOGO["transform"]
-SYMBOLS = f"""
+T_ = LOGO["transform"]
+DEFAULT_LOGO = {"monti": "#4A5560", "care": "#1A847F", "tag": "#65707C",
+                "monti_neg": "#FFFFFF", "care_neg": "#A9D5D1", "tag_neg": "#B6BFC8"}
+
+
+def symbols(c=None):
+    c = c or DEFAULT_LOGO
+    return f"""
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
-  <g id="mc-monti"><path transform="{T}" fill="#4A5560" d="{LOGO['monti']}"/></g>
-  <g id="mc-care"><path transform="{T}" fill="#1A847F" d="{LOGO['care']}"/></g>
-  <g id="mc-tag"><path transform="{T}" fill="#65707C" d="{LOGO['tag']}"/></g>
-  <g id="mc-monti-neg"><path transform="{T}" fill="#FFFFFF" d="{LOGO['monti']}"/></g>
-  <g id="mc-care-neg"><path transform="{T}" fill="#A9D5D1" d="{LOGO['care']}"/></g>
-  <g id="mc-tag-neg"><path transform="{T}" fill="#B6BFC8" d="{LOGO['tag']}"/></g>
+  <g id="mc-monti"><path transform="{T_}" fill="{c['monti']}" d="{LOGO['monti']}"/></g>
+  <g id="mc-care"><path transform="{T_}" fill="{c['care']}" d="{LOGO['care']}"/></g>
+  <g id="mc-tag"><path transform="{T_}" fill="{c['tag']}" d="{LOGO['tag']}"/></g>
+  <g id="mc-monti-neg"><path transform="{T_}" fill="{c['monti_neg']}" d="{LOGO['monti']}"/></g>
+  <g id="mc-care-neg"><path transform="{T_}" fill="{c['care_neg']}" d="{LOGO['care']}"/></g>
+  <g id="mc-tag-neg"><path transform="{T_}" fill="{c['tag_neg']}" d="{LOGO['tag']}"/></g>
 </defs></svg>
 """
+
+
+SYMBOLS = symbols()
 
 SWITCH_CSS = """
 /* ---- presentation switcher: a tool, not part of any prototype ---- */
@@ -302,14 +319,38 @@ CONCEPT_META = {
           "what happens next."),
 }
 
-GREY_VARIANTS = {
+# Colour schemes. Every text pair in each one was contrast-checked before it was
+# written here; see brand/newpalette.py for the derivation and the audit.
+SCHEMES = {
     # Webster read the near-black as black on screen. This lifts only the darkest
     # token, holding 10.83:1 on white, so it reads grey without losing legibility.
-    "soft": ':root{--grey-900:#303F4E}',
+    "soft": {"css": ":root{--grey-900:#303F4E}", "logo": None},
+
+    # The client's new palette, teal led. Actions stay teal because it is the only
+    # colour in the set that clears AA as a button or a link.
+    "teal": {"css": (":root{"
+        "--aqua-900:%(deepteal)s;--aqua-700:%(teal)s;--aqua-500:%(lightteal)s;"
+        "--aqua-400:%(lightteal)s;--aqua-300:%(tint_teal)s;--aqua-100:%(tint_teal)s;"
+        "--aqua-50:%(wash_teal)s;"
+        "--grey-900:%(navy)s;--grey-700:%(body)s;--grey-600:%(quiet)s;"
+        "--grey-300:%(line)s;--grey-200:%(rule)s;--grey-50:%(page)s}") % T,
+        "logo": {"monti": T["indigo"], "care": T["teal"], "tag": T["quiet"],
+                 "monti_neg": "#FFFFFF", "care_neg": T["tint_teal"], "tag_neg": T["line"]}},
+
+    # Same palette, rose led. Pink carries whole sections and the badge ring, while
+    # buttons and links stay teal for the same legibility reason.
+    "rose": {"css": (":root{"
+        "--aqua-900:%(deepteal)s;--aqua-700:%(teal)s;--aqua-500:%(mauve)s;"
+        "--aqua-400:%(pink)s;--aqua-300:%(tint_pink)s;--aqua-100:%(tint_pink)s;"
+        "--aqua-50:%(wash_pink)s;"
+        "--grey-900:%(indigo)s;--grey-700:%(body)s;--grey-600:%(quiet)s;"
+        "--grey-300:%(line)s;--grey-200:%(rule)s;--grey-50:%(page)s}") % T,
+        "logo": {"monti": T["indigo"], "care": T["mauve"], "tag": T["quiet"],
+                 "monti_neg": "#FFFFFF", "care_neg": T["pink"], "tag_neg": T["line"]}},
 }
 
 
-def build_standalone(key, grey=None):
+def build_standalone(key, scheme=None):
     body = P(f"{key}.html") + FOOTER
     used = sorted(set(re.findall(r"var\(--img-([a-z0-9-]+)\)", body)))
     tokens = "\n".join(
@@ -334,25 +375,25 @@ def build_standalone(key, grey=None):
 {tokens}
 }}
 {P('base.css')}
-{GREY_VARIANTS.get(grey, "")}
+{SCHEMES.get(scheme, {}).get('css', '')}
 </style>
 </head>
 <body>
-{SYMBOLS}
+{symbols(SCHEMES.get(scheme, {}).get("logo"))}
 <div class="proto" id="proto-{key}">{body}</div>
 <script>{js}</script>
 </body>
 </html>
 """
-    suffix = f"-{grey}grey" if grey else ""
+    suffix = f"-{scheme}" if scheme else ""
     out = f"{HERE}/../monticare-concept-{key}{suffix}.html"
     open(out, "w").write(doc)
     print(f"  {os.path.basename(out)}  {len(doc)/1024/1024:.2f} MB  ({len(used)} images)")
 
 import sys
 if "--only" in sys.argv:
-    grey = None
-    if "--grey" in sys.argv:
-        grey = sys.argv[sys.argv.index("--grey") + 1]
+    scheme = None
+    if "--scheme" in sys.argv:
+        scheme = sys.argv[sys.argv.index("--scheme") + 1]
     for k in sys.argv[sys.argv.index("--only") + 1].split(","):
-        build_standalone(k.strip(), grey)
+        build_standalone(k.strip(), scheme)
