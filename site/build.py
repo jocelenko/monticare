@@ -40,8 +40,8 @@ FOOTER = """
         <svg viewBox="0 0 690.18 234.25" style="height:38px;width:auto" role="img">
           <title>MontiCare</title><use href="#mc-monti-neg"/><use href="#mc-care-neg"/><use href="#mc-tag-neg"/></svg>
         <p style="margin-top:18px;max-width:38ch;font-size:15.5px;line-height:1.6">
-          Registered NDIS provider delivering in-home, community and high intensity
-          complex care across Brisbane, Moreton Bay and the Sunshine Coast.</p>
+          NDIS provider delivering in-home, community and high intensity complex
+          care across Brisbane, Moreton Bay and the Sunshine Coast.</p>
       </div>
       <div>
         <h3>Get in touch</h3>
@@ -53,12 +53,13 @@ FOOTER = """
       <div>
         <h3>Supports</h3>
         <p style="font-size:15.5px;line-height:2">
-          High intensity &amp; complex care<br>In-home support<br>Domestic assistance<br>
-          Community access<br>Transport<br>Daily living support</p>
+          High intensity &amp; complex care<br>Supported Independent Living<br>
+          In-home support &amp; daily activities<br>Community access &amp; participation<br>
+          Hospital to home transition<br>Behaviour support &amp; mental health</p>
       </div>
     </div>
     <div class="ftr-base">
-      <span>&copy; 2026 MontiCare. NDIS registration number to be displayed here.</span>
+      <span>&copy; 2026 MontiCare Pty Ltd &middot; ABN 86 768 265 615</span>
       <span><a href="#">Privacy policy</a> &nbsp;&middot;&nbsp; <a href="#">Feedback &amp; complaints</a></span>
     </div>
   </div>
@@ -291,17 +292,24 @@ print(f"  {os.path.basename(out)}  {len(html)/1024/1024:.2f} MB")
 # ============================================================
 CONCEPT_META = {
     "a": ("MontiCare — NDIS support across Brisbane, Moreton Bay and the Sunshine Coast",
-          "Registered NDIS provider in Burpengary East. In-home support, community "
-          "access and high-intensity complex care."),
+          "NDIS provider in Burpengary East. In-home support, community access "
+          "and high-intensity complex care."),
     "b": ("MontiCare — high intensity and complex NDIS care",
-          "Registered NDIS provider delivering complex care across Brisbane, Moreton "
+          "NDIS provider delivering complex care across Brisbane, Moreton "
           "Bay and the Sunshine Coast."),
     "c": ("MontiCare — NDIS support at home and in the community",
-          "Registered NDIS provider in Burpengary East. Ring us and here is exactly "
+          "NDIS provider in Burpengary East. Ring us and here is exactly "
           "what happens next."),
 }
 
-def build_standalone(key):
+GREY_VARIANTS = {
+    # Webster read the near-black as black on screen. This lifts only the darkest
+    # token, holding 10.83:1 on white, so it reads grey without losing legibility.
+    "soft": ':root{--grey-900:#303F4E}',
+}
+
+
+def build_standalone(key, grey=None):
     body = P(f"{key}.html") + FOOTER
     used = sorted(set(re.findall(r"var\(--img-([a-z0-9-]+)\)", body)))
     tokens = "\n".join(
@@ -326,6 +334,7 @@ def build_standalone(key):
 {tokens}
 }}
 {P('base.css')}
+{GREY_VARIANTS.get(grey, "")}
 </style>
 </head>
 <body>
@@ -335,11 +344,15 @@ def build_standalone(key):
 </body>
 </html>
 """
-    out = f"{HERE}/../monticare-concept-{key}.html"
+    suffix = f"-{grey}grey" if grey else ""
+    out = f"{HERE}/../monticare-concept-{key}{suffix}.html"
     open(out, "w").write(doc)
     print(f"  {os.path.basename(out)}  {len(doc)/1024/1024:.2f} MB  ({len(used)} images)")
 
 import sys
 if "--only" in sys.argv:
+    grey = None
+    if "--grey" in sys.argv:
+        grey = sys.argv[sys.argv.index("--grey") + 1]
     for k in sys.argv[sys.argv.index("--only") + 1].split(","):
-        build_standalone(k.strip())
+        build_standalone(k.strip(), grey)

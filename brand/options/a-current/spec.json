@@ -1,0 +1,37 @@
+{
+  "diameter": 1024.0,
+  "wordmark_cap": 102.41,
+  "wordmark_width": 690.18,
+  "tagline_cap": 30.0032,
+  "tagline_tracking": 369,
+  "gap": 100.00384,
+  "ring": 16.00512,
+  "block_dy": 16.00512,
+  "optical_dx": 4.0,
+  "wordmark_centre": 516.0,
+  "tagline_centre": 512.0,
+  "flat_viewbox": [
+    690.18,
+    234.25
+  ],
+  "block_centre": 528.01,
+  "palette": {
+    "aqua900": "#005B57",
+    "aqua700": "#1A847F",
+    "aqua500": "#46A49E",
+    "aqua400": "#80BFBA",
+    "aqua300": "#A9D5D1",
+    "aqua100": "#D6ECEA",
+    "aqua50": "#E7F5F4",
+    "grey900": "#1B252F",
+    "grey700": "#4A5560",
+    "grey600": "#65707C",
+    "grey500": "#7D8892",
+    "grey300": "#B6BFC8",
+    "grey200": "#D5DCE2",
+    "grey100": "#E8EDF3",
+    "grey50": "#F3F7FB",
+    "white": "#FFFFFF",
+    "black": "#000000"
+  }
+}
