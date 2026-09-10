@@ -52,7 +52,7 @@ a:hover{color:var(--aqua-900);text-decoration-thickness:2px}
 
 /* ---------- the phone number is a component, not a detail ---------- */
 .tel{display:inline-flex;align-items:center;gap:10px;font-weight:800;
-     min-height:44px;padding-block:4px;
+     min-height:44px;padding-block:4px;flex:none;white-space:nowrap;
      color:var(--grey-900);text-decoration:none;letter-spacing:-.01em;
      font-variant-numeric:tabular-nums}
 .tel:hover{color:var(--aqua-900)}
@@ -90,7 +90,18 @@ a:hover{color:var(--aqua-900);text-decoration-thickness:2px}
   .hdr-cta{margin-left:0}
 }
 @media(min-width:981px){.menu-panel{display:none!important}}
-@media(max-width:600px){.hdr-cta .btn{display:none}}
+@media(max-width:760px){.hdr-cta .btn{display:none}}
+/* Most referrals arrive by voice, so the phone number must never be clipped.
+   Below 640px the logo takes row one and the menu and phone share row two.
+   No auto margins here, so nothing can be pushed past the edge. */
+@media(max-width:640px){
+  .hdr-in{flex-wrap:wrap;min-height:0;padding-block:9px;gap:12px;
+          align-items:center}
+  .logo{flex:1 0 100%}
+  .logo svg{height:27px}
+  .menu-btn{margin-left:0;flex:none;order:1}
+  .hdr-cta{flex:0 1 auto;margin-left:0;order:2;min-width:0}
+}
 
 /* ---------- section rhythm: more space above a heading than below ---------- */
 .sec{padding-block:clamp(56px,8vw,104px)}
