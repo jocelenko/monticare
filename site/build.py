@@ -326,26 +326,29 @@ SCHEMES = {
     # token, holding 10.83:1 on white, so it reads grey without losing legibility.
     "soft": {"css": ":root{--grey-900:#303F4E}", "logo": None},
 
-    # The client's new palette, teal led. Actions stay teal because it is the only
-    # colour in the set that clears AA as a button or a link.
+    # The client's new palette, applied at full strength. Section grounds and dark
+    # bands use his hexes directly rather than pale derivations of them, because
+    # the derived version was visually indistinguishable from the old palette.
+    # Only navy #021428 clears AA on every one of his grounds, so it carries text.
     "teal": {"css": (":root{"
-        "--aqua-900:%(deepteal)s;--aqua-700:%(teal)s;--aqua-500:%(lightteal)s;"
+        "--aqua-900:%(navy)s;--aqua-700:%(teal)s;--aqua-500:%(teal)s;"
         "--aqua-400:%(lightteal)s;--aqua-300:%(tint_teal)s;--aqua-100:%(tint_teal)s;"
         "--aqua-50:%(wash_teal)s;"
-        "--grey-900:%(deepteal)s;--grey-700:%(body)s;--grey-600:%(quiet)s;"
-        "--grey-300:%(line)s;--grey-200:%(rule)s;--grey-50:%(sect_teal)s}") % T,
+        "--grey-900:%(navy)s;--grey-700:%(navy)s;--grey-600:%(navy)s;"
+        "--grey-300:%(line)s;--grey-200:%(rule)s;--grey-50:%(lightteal)s}") % T,
         "logo": {"monti": T["indigo"], "care": T["teal"], "tag": T["quiet"],
-                 "monti_neg": "#FFFFFF", "care_neg": T["tint_teal"], "tag_neg": T["line"]}},
+                 "monti_neg": "#FFFFFF", "care_neg": T["lightteal"], "tag_neg": T["line"]}},
 
-    # Same palette, rose led. Pink carries whole sections and the badge ring, while
-    # buttons and links stay teal for the same legibility reason.
+    # Same palette, rose led. Pale pink carries the sections and indigo the dark
+    # bands. Buttons stay teal because it is the only hue in the set that holds
+    # white text.
     "rose": {"css": (":root{"
-        "--aqua-900:%(deepteal)s;--aqua-700:%(teal)s;--aqua-500:%(mauve)s;"
-        "--aqua-400:%(pink)s;--aqua-300:%(tint_pink)s;--aqua-100:%(tint_pink)s;"
+        "--aqua-900:%(indigo)s;--aqua-700:%(teal)s;--aqua-500:%(mauve)s;"
+        "--aqua-400:%(mauve)s;--aqua-300:%(tint_pink)s;--aqua-100:%(tint_pink)s;"
         "--aqua-50:%(wash_pink)s;"
-        "--grey-900:%(indigo)s;--grey-700:%(body)s;--grey-600:%(quiet)s;"
-        "--grey-300:%(line)s;--grey-200:%(rule)s;--grey-50:%(sect_pink)s}") % T,
-        "logo": {"monti": T["indigo"], "care": T["mauve"], "tag": T["quiet"],
+        "--grey-900:%(indigo)s;--grey-700:%(navy)s;--grey-600:%(deepteal)s;"
+        "--grey-300:%(line)s;--grey-200:%(rule)s;--grey-50:%(pink)s}") % T,
+        "logo": {"monti": T["indigo"], "care": T["mauve"], "tag": T["deepteal"],
                  "monti_neg": "#FFFFFF", "care_neg": T["pink"], "tag_neg": T["line"]}},
 }
 
